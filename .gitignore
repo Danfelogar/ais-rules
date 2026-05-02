@@ -82,3 +82,7 @@ yarn-error.log
 .env.production.local
 # Added by ggshield
 .cache_ggshield
+
+# Vite
+dist/
+*.tsbuildinfo
