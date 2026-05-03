@@ -48,9 +48,9 @@ description: "Task list template for feature implementation"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create project structure per implementation plan
-- [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T001 [P] Create component files in kebab-case under `src/components/`
+- [ ] T002 [P] Initialize Zustand store in `src/stores/[feature-name].ts`
+- [ ] T003 [P] Add TanStack Query hooks in `src/hooks/use-[feature-name].ts`
 
 ---
 

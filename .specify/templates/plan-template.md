@@ -31,7 +31,14 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] TypeScript strict mode is not relaxed (Principle I)
+- [ ] React 18 functional components only, no class components (Principle II)
+- [ ] shadcn/ui + Tailwind CSS for all UI work (Principle III)
+- [ ] Zustand for global state, local state for component-only (Principle IV)
+- [ ] TanStack Query for all async data fetching (Principle V)
+- [ ] Components remain under 150 lines with single responsibility (Principle VI)
+- [ ] Naming conventions: PascalCase components, camelCase hooks/utils, kebab-case files (Principle VII)
+- [ ] Feature spec exists and is approved before implementation (Principle VIII)
 
 ## Project Structure
 

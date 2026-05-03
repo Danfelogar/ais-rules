@@ -4,6 +4,7 @@
 **Created**: [DATE]  
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
+**Constitution**: This spec MUST comply with `.specify/memory/constitution.md` principles.
 
 ## User Scenarios & Testing *(mandatory)*
 
