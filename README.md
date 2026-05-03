@@ -1,43 +1,73 @@
-# ais-rules
+# React + TypeScript + Vite
 
-A centralized repository for configuring and managing AI coding assistants across different tools and workflows.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Purpose
+Currently, two official plugins are available:
 
-This project provides rules, configurations, and guidelines for working with AI-powered development tools, ensuring consistent behavior and best practices across your team.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Tools Covered
+## React Compiler
 
-| Tool | Description |
-|------|-------------|
-| [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding assistant for the terminal |
-| [OpenAI Codex CLI](https://github.com/openai/codex) | OpenAI's command-line coding assistant |
-| [Cursor](https://www.cursor.com/) | AI-powered code editor |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | Google's Gemini assistant for the terminal |
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Repository Structure
+## Expanding the ESLint configuration
 
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-ais-rules/
-├── claude-code/        # Rules and config for Claude Code
-├── codex/              # Rules and config for OpenAI Codex CLI
-├── cursor/             # Rules and config for Cursor
-└── gemini/             # Rules and config for Gemini CLI
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-## Getting Started
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/ais-rules.git
-   ```
-
-2. Navigate to the tool you want to configure and follow the instructions in its folder.
-
-## Contributing
-
-Feel free to open a PR to add new rules, improve existing ones, or add support for additional AI tools.
-
-## License
-
-MIT
