@@ -1,4 +1,5 @@
 import { Star } from 'lucide-react'
+import { useNotificationStore } from '@/stores/notification-store'
 import { usePokemonDetail } from '@/hooks/use-pokemon-detail'
 import { useFavoritesStore } from '@/stores/favorites-store'
 import type { PokemonSummary } from '@/types/pokemon'
@@ -15,6 +16,18 @@ export function PokemonCard({
   const { pokemon, isLoading } = usePokemonDetail(summary.name)
   const isFavorite = useFavoritesStore((s) => s.isFavorite)
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
+  const addNotification = useNotificationStore.getState().addNotification
+
+  const handleToggleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    const wasFavorite = isFavorite(summary.name)
+    toggleFavorite(summary.name)
+    if (!wasFavorite) {
+      addNotification('success', `Added ${summary.name} to favorites!`)
+    } else {
+      addNotification('info', `Removed ${summary.name} from favorites.`)
+    }
+  }
 
   const hp = pokemon?.stats.find((s) => s.name === 'hp')
   const attack = pokemon?.stats.find((s) => s.name === 'attack')
@@ -29,10 +42,7 @@ export function PokemonCard({
     >
       <button
         type="button"
-        onClick={(e) => {
-          e.stopPropagation()
-          toggleFavorite(summary.name)
-        }}
+        onClick={handleToggleFavorite}
         className="absolute right-2 top-2 z-10 rounded-full p-1 hover:bg-gray-100"
       >
         <Star
